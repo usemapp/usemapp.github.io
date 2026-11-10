@@ -76,6 +76,8 @@ img{display:block;max-width:100%;height:auto}
 .nav nav{display:flex;gap:24px;margin-left:auto;font-size:14.5px;color:var(--tx2)}
 .nav nav a{transition:color .2s}.nav nav a:hover,.nav nav a.ativo{color:var(--tx)}
 .nav .bt{padding:8px 16px;font-size:14px}
+.nav .entrar small{font-weight:500;font-size:11.5px;opacity:.8}
+@media(max-width:520px){.nav .entrar small{display:none}}
 .tema{width:36px;height:36px;border-radius:50%;border:0;background:var(--roxo-suave);color:var(--roxo-forte);cursor:pointer;display:grid;place-items:center}
 .tema svg{width:18px;height:18px}
 
@@ -255,6 +257,7 @@ html.foto{scroll-behavior:auto}.foto .sobe{opacity:1;transform:none}.foto .pc{tr
 <header class="nav" id="nav"><div class="miolo">
   <a class="marca" href="#topo"><svg width="30" height="30" viewBox="0 0 256 256"><rect width="256" height="256" rx="56" fill="#2B2D31"/><polygon transform="translate(48.6 48.6) scale(.62)" fill="#B096FF" points="16,16 240,16 240,64 131.9,64 195.9,128 131.9,192 240,192 240,240 16,240 128,128"/></svg>mapp</a>
   <nav><a href="#tudo">O que faz</a><a href="#agente">Agente pessoal</a><a href="#telas">Telas</a><a href="#confianca">Seus dados</a><a href="#historia">Como nasceu</a></nav>
+  <a class="bt r entrar" href="https://app.usemapp.tech/" title="O acesso é só para convidados">Entrar <small>só convidados</small></a>
   <button class="tema" id="tema" aria-label="Trocar tema claro ou escuro"></button>
 </div></header>
 
