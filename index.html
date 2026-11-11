@@ -29,13 +29,7 @@
   --sombra:0 1px 2px rgba(20,12,40,.04),0 18px 50px rgba(20,12,40,.10);
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --pagina:#2B2D31; --faixa:#313338; --cartao:#313338; --cartao2:#2B2D31; --tx:#F2F3F5; --tx2:#B5BAC1; --linha:#3F4147;
-  --roxo-suave:rgba(176,150,255,.16); --roxo-forte:#B096FF;
-  --verde-s:rgba(90,223,156,.14); --verde-t:#5ADF9C; --azul-s:rgba(106,170,255,.14); --azul-t:#6AAAFF;
-  --laranja-s:rgba(255,178,87,.14); --laranja-t:#FFB257; --rosa-s:rgba(255,138,165,.14); --rosa-t:#FF8AA5;
-  --sombra:0 18px 50px rgba(0,0,0,.35); color-scheme:dark;
-}}
+/* o site abre sempre no claro (branco), mesmo com o sistema no escuro; o escuro vem só do botão da lua */
 :root[data-theme="dark"]{
   --pagina:#2B2D31; --faixa:#313338; --cartao:#313338; --cartao2:#2B2D31; --tx:#F2F3F5; --tx2:#B5BAC1; --linha:#3F4147;
   --roxo-suave:rgba(176,150,255,.16); --roxo-forte:#B096FF;
@@ -73,9 +67,13 @@ img{display:block;max-width:100%;height:auto}
 .nav.vidro{background:color-mix(in srgb,var(--pagina) 78%,transparent);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 1px 0 var(--linha)}
 .nav .miolo{display:flex;align-items:center;gap:28px;height:60px}
 .marca{display:flex;align-items:center;gap:10px;font-weight:750;font-size:19px;letter-spacing:-.02em}
+/* "mapp" só tem minúsculas: o centro que o olho vê é o miolo das letras (altura do x), não a caixa da linha */
+.marca span{text-box:trim-both ex alphabetic}
+@supports not (text-box:trim-both ex alphabetic){.marca span{transform:translateY(-.14em)}}
 .nav nav{display:flex;gap:24px;margin-left:auto;font-size:14.5px;color:var(--tx2)}
 .nav nav a{transition:color .2s}.nav nav a:hover,.nav nav a.ativo{color:var(--tx)}
 .nav .bt{padding:8px 16px;font-size:14px}
+.nav .entrar{align-items:baseline}   /* "Entrar" e "só convidados" na mesma linha de base */
 .nav .entrar small{font-weight:500;font-size:11.5px;opacity:.8}
 @media(max-width:520px){.nav .entrar small{display:none}}
 .tema{width:36px;height:36px;border-radius:50%;border:0;background:var(--roxo-suave);color:var(--roxo-forte);cursor:pointer;display:grid;place-items:center}
@@ -255,7 +253,7 @@ html.foto{scroll-behavior:auto}.foto .sobe{opacity:1;transform:none}.foto .pc{tr
 <body>
 
 <header class="nav" id="nav"><div class="miolo">
-  <a class="marca" href="#topo"><svg width="30" height="30" viewBox="0 0 256 256"><rect width="256" height="256" rx="56" fill="#2B2D31"/><polygon transform="translate(48.6 48.6) scale(.62)" fill="#B096FF" points="16,16 240,16 240,64 131.9,64 195.9,128 131.9,192 240,192 240,240 16,240 128,128"/></svg>mapp</a>
+  <a class="marca" href="#topo"><svg width="30" height="30" viewBox="0 0 256 256"><rect width="256" height="256" rx="56" fill="#2B2D31"/><polygon transform="translate(48.6 48.6) scale(.62)" fill="#B096FF" points="16,16 240,16 240,64 131.9,64 195.9,128 131.9,192 240,192 240,240 16,240 128,128"/></svg><span>mapp</span></a>
   <nav><a href="#tudo">O que faz</a><a href="#agente">Agente pessoal</a><a href="#telas">Telas</a><a href="#confianca">Seus dados</a><a href="#historia">Como nasceu</a></nav>
   <a class="bt r entrar" href="https://app.usemapp.tech/" title="O acesso é só para convidados">Entrar <small>só convidados</small></a>
   <button class="tema" id="tema" aria-label="Trocar tema claro ou escuro"></button>
@@ -511,7 +509,7 @@ document.querySelectorAll("section[id]").forEach(s => io2.observe(s));
 /* tema claro/escuro */
 const SOL = ICONES.sol || "", LUA = ICONES.lua || "";
 const raiz = document.documentElement, btTema = document.getElementById("tema");
-const escuro = () => raiz.dataset.theme ? raiz.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+const escuro = () => raiz.dataset.theme === "dark";
 const pinta = () => { btTema.innerHTML = escuro() ? SOL : LUA; btTema.querySelector("svg")?.setAttribute("style", "fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round"); };
 btTema.addEventListener("click", () => { raiz.dataset.theme = escuro() ? "light" : "dark"; pinta(); });
 pinta();

@@ -15,11 +15,6 @@
   --roxo:#B096FF; --roxo-forte:#6D4FD1; --roxo-suave:#F0EAFE; --laranja-s:#FEF3E2; --laranja-t:#A86A12;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root{
-  --pagina:#2B2D31; --faixa:#313338; --tx:#F2F3F5; --tx2:#B5BAC1; --linha:#3F4147;
-  --roxo-forte:#B096FF; --roxo-suave:rgba(176,150,255,.16); --laranja-s:rgba(255,178,87,.14); --laranja-t:#FFB257;
-  color-scheme:dark;
-}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--pagina);color:var(--tx);font:16.5px/1.6 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
 h1,h2{font-family:"Segoe UI Variable Display","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;font-weight:750;letter-spacing:-.02em;margin:0}
@@ -28,6 +23,8 @@ a:hover{text-decoration:underline}
 .miolo{max-width:760px;margin:0 auto;padding:0 20px}
 .topo{display:flex;align-items:center;height:64px}
 .marca{display:flex;align-items:center;gap:10px;font-weight:750;font-size:19px;letter-spacing:-.02em;color:var(--tx)}
+.marca span{text-box:trim-both ex alphabetic}   /* centraliza o miolo das minúsculas com o Σ */
+@supports not (text-box:trim-both ex alphabetic){.marca span{transform:translateY(-.14em)}}
 .marca:hover{text-decoration:none}
 h1{font-size:clamp(34px,6vw,52px);line-height:1.05;letter-spacing:-.035em;margin-top:38px}
 .data{color:var(--tx2);margin:12px 0 0}
@@ -43,7 +40,7 @@ ul{padding-left:22px}li{margin-top:8px}
 </head>
 <body>
 <div class="miolo">
-  <header class="topo"><a class="marca" href="index.html"><svg width="30" height="30" viewBox="0 0 256 256" aria-hidden="true"><rect width="256" height="256" rx="56" fill="#2B2D31"/><polygon transform="translate(48.6 48.6) scale(.62)" fill="#B096FF" points="16,16 240,16 240,64 131.9,64 195.9,128 131.9,192 240,192 240,240 16,240 128,128"/></svg>mapp</a></header>
+  <header class="topo"><a class="marca" href="index.html"><svg width="30" height="30" viewBox="0 0 256 256" aria-hidden="true"><rect width="256" height="256" rx="56" fill="#2B2D31"/><polygon transform="translate(48.6 48.6) scale(.62)" fill="#B096FF" points="16,16 240,16 240,64 131.9,64 195.9,128 131.9,192 240,192 240,240 16,240 128,128"/></svg><span>mapp</span></a></header>
 <main>
   <h1>Política de privacidade</h1>
   <p class="data">Atualizada em 10 de novembro de 2026</p>
