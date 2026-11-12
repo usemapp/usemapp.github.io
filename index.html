@@ -113,8 +113,8 @@ button{font:inherit;color:inherit}
 .hC .palco{display:none}
 
 /* ---------- moldura dos aparelhos ---------- */
-.moldura-pc{border-radius:18px;background:var(--cinza);padding:10px;box-shadow:var(--sombra)}
-.moldura-cel{border-radius:46px;background:var(--cinza);padding:9px;box-shadow:var(--sombra)}
+.moldura-pc{border-radius:14px;background:var(--cinza);padding:4px;box-shadow:var(--sombra)}
+.moldura-cel{border-radius:42px;background:var(--cinza);padding:4px;box-shadow:var(--sombra)}
 .tela-esc{position:relative;overflow:hidden;width:100%}
 /* no escuro do site a moldura tem a mesma cor do fundo: um fio da cor da linha separa as duas */
 :root[data-theme="dark"] :is(.moldura-pc,.moldura-cel,.hero .sig){box-shadow:0 0 0 1px #3F4147,var(--sombra)}
@@ -261,7 +261,7 @@ button{font:inherit;color:inherit}
 .ic:hover{transform:translateY(-4px) rotate(-4deg)}
 .ic svg{width:28px;height:28px}
 .ic .emo{font-size:28px;line-height:1}.b .ic .emo,.pr .ic .emo{font-size:25px}
-.ic.lg{box-shadow:inset 0 0 0 1px rgba(128,128,128,.28)}.ic.lg svg{width:35px;height:35px}
+.ic.lg svg{width:35px;height:35px}
 .lg0{background:#F0EAFE;color:#A07EFF}.lg1{background:#6D4FD1;color:#F0EAFE}.lg2{background:#2B2D31;color:#B5BAC1}.lg3{background:#DCCEFC;color:#6D4FD1}
 .lg4{background:#2B2D31;color:#B096FF}.lg5{background:#3B3260;color:#B096FF}.lg6{background:#A07EFF;color:#FFFFFF}.lg7{background:#313338;color:#F2F3F5}
 .c0{background:var(--roxo-suave);color:var(--roxo-forte)}.c1{background:var(--verde-s);color:var(--verde-t)}
@@ -297,8 +297,10 @@ button{font:inherit;color:inherit}
 .baia .lead{color:#B5BAC1}
 .baia .tit{font-size:clamp(42px,7.5vw,92px)}
 .agente{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;margin-top:64px;align-items:center;position:relative}
-.galeria{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.galeria{display:block}
 .ag{aspect-ratio:1;border-radius:22px;background:#313338;border:1.5px solid transparent;color:#B096FF;display:grid;place-items:center;cursor:pointer;transition:transform .4s var(--mola),background .25s,border-color .25s;position:relative}
+.g-fila{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}.g-fila .ag{width:calc(25% - 9px)}
+.g-nota{margin:18px 0 0;text-align:center;font-size:15px;font-weight:600;color:#B5BAC1}
 .ag svg{width:46%;height:46%}
 .ag:hover{transform:translateY(-4px) scale(1.04);background:#383A40}
 .ag.on{border-color:#B096FF;background:#3B3260}
@@ -395,7 +397,7 @@ html.foto{scroll-behavior:auto}.foto .sobe{opacity:1;transform:none}.foto .bolha
   .b.l4 .txt{max-width:none}
   .peca{position:relative;right:auto;top:auto;bottom:auto;width:100%;margin-top:22px}
   .agente{grid-template-columns:1fr;gap:56px}
-  .galeria{grid-template-columns:repeat(4,1fr)}
+  .g-fila{gap:10px}
   .numeros{grid-template-columns:1fr 1fr}
   .promessas,.linha-tempo{grid-template-columns:1fr}
   .passo::before{display:none}
@@ -802,7 +804,10 @@ function escolhe(id) {
   av.innerHTML = svgAg(id); av.classList.remove("pula"); void av.offsetWidth; av.classList.add("pula");
   nomeAg.textContent = AGENTES[id][0];
 }
-gal.innerHTML = caras.map(id => `<button class="ag" data-id="${id}" aria-label="${AGENTES[id][0]}">${svgAg(id)}</button>`).join("");
+/* na vitrine, só uma amostra (a primeira fileira + Fada e Mago); o número acima continua contando todas */
+const AMOSTRA = [...caras.slice(0, 5), "fada", "mago"].filter((id, k, l) => AGENTES[id] && l.indexOf(id) === k);
+const botoesAg = AMOSTRA.map(id => `<button class="ag" data-id="${id}" aria-label="${AGENTES[id][0]}">${svgAg(id)}</button>`).join("");
+gal.innerHTML = `<div class="g-fila">${botoesAg}</div><p class="g-nota">e mais ${caras.length - AMOSTRA.length} caras para escolher no app ✨</p>`;
 gal.addEventListener("click", e => { const b = e.target.closest(".ag"); if (b) escolhe(b.dataset.id); });
 escolhe(caras.includes("droide") ? "droide" : caras[0]);
 
