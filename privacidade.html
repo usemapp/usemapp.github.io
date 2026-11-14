@@ -44,7 +44,7 @@ ul{padding-left:22px}li{margin-top:8px}
   <header class="topo"><a class="marca" href="index.html"><svg width="30" height="30" viewBox="0 0 256 256" aria-hidden="true"><rect width="256" height="256" rx="56" fill="#2B2D31"/><polygon transform="translate(48.6 48.6) scale(.62)" fill="#B096FF" points="16,16 240,16 240,64 131.9,64 195.9,128 131.9,192 240,192 240,240 16,240 128,128"/></svg><span>mapp</span></a></header>
 <main>
   <h1>Política de privacidade</h1>
-  <p class="data">Atualizada em 10 de novembro de 2026</p>
+  <p class="data">Atualizada em 14 de novembro de 2026</p>
 
   <div class="resumo">
     <p><b>Em poucas palavras:</b> o mapp é um projeto pessoal, sem anúncios, sem rastreamento e sem venda de dados. Cada
@@ -58,26 +58,22 @@ ul{padding-left:22px}li{margin-top:8px}
     passou por auditoria externa.</p>
 
   <h2>Onde ficam os dados</h2>
-  <p>O mapp funciona de um de dois jeitos, e o próprio app diz em qual você está (nos Ajustes, em “Como protegemos”):</p>
-  <ul>
-    <li><b>No computador do administrador.</b> O app roda num computador com Windows e os dados ficam numa pasta local.
-      Quem é convidado usa pelo celular, por uma rede privada (Tailscale). Tokens de acesso e senhas ficam criptografados
-      pelo próprio Windows.</li>
-    <li><b>Num servidor alugado pelo administrador</b> (uma máquina virtual), no endereço <b>app.usemapp.tech</b>. O
-      caminho até o servidor passa pela Cloudflare: ela confere se o seu e-mail está na lista de convidados e leva os
-      pedidos por um túnel, sem nenhuma porta do servidor aberta para a internet. O mapp confere a assinatura da
-      Cloudflare em cada pedido antes de responder. Tokens de acesso ficam cifrados no servidor (AES-256), com a chave
-      fora da pasta de dados.</li>
-  </ul>
-  <p>Nos dois casos, cada pessoa tem uma pasta separada, e a de quem é convidado é cifrada com uma senha só dela: em disco
-    e nos backups, fica ilegível sem essa senha ou o código de recuperação. Não existe tela do app que mostre ao
-    administrador os lançamentos, e-mails ou conversas de quem foi convidado: ele vê quem foi convidado e quanto cada
-    pessoa usa da IA.</p>
+  <p>O mapp roda num servidor alugado pelo administrador (uma máquina virtual), no endereço <b>app.usemapp.tech</b>. O
+    caminho até o servidor passa pela Cloudflare: ela confere se o seu e-mail está na lista de convidados e leva os
+    pedidos por um túnel, sem nenhuma porta do servidor aberta para a internet. O mapp confere a assinatura da Cloudflare
+    em cada pedido antes de responder. Tokens de acesso ficam cifrados no servidor (AES-256), com a chave fora da pasta de
+    dados.</p>
+  <p>Cada pessoa tem uma pasta separada, e a de quem é convidado é cifrada com uma senha só dela: em disco e nos backups,
+    fica ilegível sem essa senha ou o código de recuperação. Enquanto a conta está destravada, os arquivos abertos ficam
+    só na memória da máquina, e o disco guarda só a cópia cifrada. Não existe tela do app que mostre ao administrador os
+    lançamentos, e-mails ou conversas de quem foi convidado: ele vê quem foi convidado e quanto cada pessoa usa da IA.</p>
   <p class="limite"><b>Limites.</b> Enquanto você usa o app, o servidor precisa ler os seus dados para funcionar; por
-    isso essa proteção não vale contra quem controla a máquina ligada e com a conta destravada. No servidor alugado, é a
-    Cloudflare que abre o HTTPS: ela tem acesso ao tráfego em trânsito (como qualquer serviço desse tipo) e fica sabendo o
+    isso essa proteção não vale contra quem controla a máquina ligada e com a conta destravada. É a Cloudflare que abre o
+    HTTPS: ela tem acesso ao tráfego em trânsito (como qualquer serviço desse tipo) e fica sabendo o
     seu e-mail e de onde você acessa. A empresa que aluga a máquina virtual tem acesso físico a ela. Se você perder a
-    senha e o código de recuperação, a conta precisa ser zerada: nem o administrador consegue recuperar.</p>
+    senha e o código de recuperação, a conta precisa ser zerada: nem o administrador consegue recuperar. A conta zerada
+    fica guardada, ainda cifrada, por 7 dias, para você desfazer se lembrar a senha ou achar o código. Depois disso, ela é
+    apagada de vez.</p>
 
   <h2>O que sai do mapp</h2>
   <p>Só o que é preciso para cada função:</p>
